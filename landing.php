@@ -18,14 +18,16 @@ get_header(); ?>
 <div id="brands" class="padding">
 
 	<section class="inner-wide">
+    
+    	<?php echo do_shortcode('[envira-gallery slug="brands"]'); ?>
 
-		<img src="sdas" alt="" class="col-6" />
+		<!--<img src="sdas" alt="" class="col-6" />
     	<img src="sdas" alt="" class="col-6" />
     	<img src="sdas" alt="" class="col-6" />
     
     	<img src="sdas" alt="" class="col-6" />
     	<img src="sdas" alt="" class="col-6" />
-    	<img src="sdas" alt="" class="col-6" />
+    	<img src="sdas" alt="" class="col-6" />-->
         
         <div class="clearfix"></div>
     
@@ -73,16 +75,16 @@ get_header(); ?>
             
 		</hgroup>
         
-        	<ul>
+        <ul>
         
-        		<li>Consultancy</li>
-            	<li>Photography</li>
-            	<li>Film making</li>
-            	<li>Graphic design</li>
-            	<li>Copywriting</li>
-            	<li>Project managing</li>
+		<?php $loop = new WP_Query( array( 'post_type' => 'services' ) ); ?>
+			<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
             
-        	</ul>  
+            	<li><?php echo get_the_title(); ?></li>
+                
+		<?php endwhile; wp_reset_query(); ?>
+        
+        </ul>
     
     </section> <!-- Inner -->
 
@@ -101,14 +103,25 @@ get_header(); ?>
 <div id="portfolio">
 
 	<div class="inner-wide">
-
-		<img src="sdas" alt="" class="col-3" />
-    	<img src="sdas" alt="" class="col-3" />
-    	<img src="sdas" alt="" class="col-3" />  
-          
-    	<img src="sdas" alt="" class="col-3" />
-    	<img src="sdas" alt="" class="col-3" />
-    	<img src="sdas" alt="" class="col-3" />
+    
+    	<?php $loop = new WP_Query( array( 'post_type' => 'portfolio' ) ); ?>
+			<?php while ( $loop->have_posts() ) : $loop->the_post(); ?>
+            
+            	<a href="<?php echo get_permalink();?>" class="col-3">
+                
+					<div class="portfolio-thumbs-overlay" style="">
+        
+        				<h2 class="portfolio-thumbs-header"><?php echo the_title(); ?></h2>
+        
+        			</div>
+                
+                	<?php $feat_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
+                    
+                    <img src="<?php echo $feat_image; ?>" alt="" class="portfolio-thumbs" />
+                                       
+                </a>
+                
+		<?php endwhile; wp_reset_query(); ?>
         
         <div class="clearfix"></div>
     
