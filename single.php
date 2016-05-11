@@ -10,18 +10,42 @@
 
 get_header(); ?>
 
-<section id="main" role="main">
+<div id="portfolio-wrapper" class="inner-wide">
 
-	<div class="inner">
-    
-    	<?php while ( have_posts() ) : the_post(); ?>
+	<div id="portfolio-header">
 
-				<?php get_template_part( 'content' ); ?>  
-   
-		<?php endwhile; ?>
-            
-    </div>
+		<h1>Portfolio Header</h1>
+
+	</div> <!-- Portfolio header -->
     
-</section> <!-- Main -->
+    <div id="portfolio-hero" class="padding">
+    
+    	<?php $feat_image = wp_get_attachment_url( get_post_thumbnail_id($post->ID) ); ?>
+                    
+		<img src="<?php echo $feat_image; ?>" alt="" />
+    
+    </div> <!-- Portfolio hero -->
+
+	<div id="portfolio-copy" class="padding">
+
+		<article>
+    
+    	<?php the_content(); ?>
+    
+    	</article>
+
+	</div> <!-- Portfolio copy -->
+
+	<div id="portfolio-thumbs">
+
+		<img src="sdfsf" alt="" class="col-3" />
+        <img src="sdfsf" alt="" class="col-3" />
+        <img src="sdfsf" alt="" class="col-3" />
+        
+        <div class="clearfix"></div>
+
+	</div> <!-- Portfolio thumbs -->
+
+</div> <!-- Wrapper -->
 
 <?php get_footer(); ?>
